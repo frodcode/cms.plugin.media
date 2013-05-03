@@ -12,6 +12,8 @@ grails.project.dependency.resolution = {
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
     repositories {
         grailsCentral()
+        mavenRepo "http://maven.thebuzzmedia.com"
+        mavenRepo "http://repo1.maven.org/maven2"
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
@@ -25,9 +27,16 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.21'
+        compile group: 'org.imgscalr',
+                name: 'imgscalr-lib',
+                version:'4.2'
+        compile group: 'org.apache.tika',
+                name:  'tika-core',
+                version: '1.3'
     }
 
     plugins {
+        runtime ":hibernate:$grailsVersion"
         build(":tomcat:$grailsVersion",
               ":release:2.2.0",
               ":rest-client-builder:1.0.3") {

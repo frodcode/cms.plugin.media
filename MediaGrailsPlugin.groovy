@@ -41,7 +41,48 @@ Brief summary/description of the plugin.
     }
 
     def doWithSpring = {
-        // TODO Implement runtime spring config (optional)
+        mediaFacade(frod.media.model.MediaFacade) {
+            mappingRegister = ref('mappingRegister')
+            mediaLocalFacade = ref('mediaLocalFacade')
+        }
+        mediaLocalFacade(frod.media.model.MediaLocalFacade) {
+            mappingRegister = ref('mappingRegister')
+            mediaFactory = ref('mediaFactory')
+        }
+        mappingRegister(frod.media.model.mapping.MappingRegister, [image : ref('imageProcessor')]) {
+            // todo register calls
+        }
+        mediaFactory(frod.media.model.MediaFactory) {
+
+        }
+
+        // processors
+        imageProcessor(frod.media.model.mapping.image.ImageProcessor) {
+
+        }
+
+        mimeTypeGuesser(frod.media.repository.MimeTypeGuesser) {
+
+        }
+
+        fileExtensionGuesser(frod.media.repository.FileExtensionGuesser) {
+
+        }
+
+        // images and files
+
+        repository_original_image(frod.media.repository.FileRepository) {
+            // todo constructor params
+        }
+
+        originalImageRepository(frod.media.image.OriginalImageRepository) {
+
+        }
+
+        imageKeyToRepoKeyConverter(frod.media.image.ImageKeyToRepoKeyConverter) {
+
+        }
+
     }
 
     def doWithDynamicMethods = { ctx ->

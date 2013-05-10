@@ -17,7 +17,7 @@ class FileRepository {
     private FilePathAssembler filePathAssembler
 
     public FileRepository(String root, String fileMod, String dirMod, String group) {
-        File this.root = new File(root)
+        this.root = new File(root)
         if (!this.root.exists()) {
             throw new IllegalArgumentException(sprintf('File repository root directory is set to be at path "%s" but the dir does not exist', root))
         }

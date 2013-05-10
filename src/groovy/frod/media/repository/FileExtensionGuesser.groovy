@@ -10,6 +10,12 @@ class FileExtensionGuesser {
     public String guessExtension(byte[] content)
     {
         FileDataSource fileDataSource = new FileDataSource()
+        fileDataSource.get
 
+    }
+
+    public String getExtension(File file)
+    {
+        return file.getName().tokenize('.').last()
     }
 }

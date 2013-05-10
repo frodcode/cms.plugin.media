@@ -8,12 +8,34 @@ import frod.media.domain.Media
  */
 class MappingRegister {
 
-    private mappings = []
+    private mappings = [:]
 
-    public Mapping<Media> getMappingByFile(InputStream inputStream)
+    MappingRegister(LinkedHashMap<String, Object> mappingsToRegister) {
+        mappingsToRegister.each {
+            register(it.key, it.value)
+        }
+    }
+
+    public void register(String slug, def processor)
+    {
+        if (hasMapping(slug)) {
+            throw new IllegalArgumentException(sprintf('Processor with slug "%s" is already registered.', slug))
+        }
+        mappings[slug] = new Mapping(processor, slug)
+    }
+
+    public boolean hasMapping(String slug)
+    {
+        if (mappings[slug]) {
+            return true;
+        }
+        return false;
+    }
+
+    public Mapping getMappingByFile(File file)
     {
         def mapping = mappings.find {
-            it.processor.canProcess(inputStream)
+            it.processor.canProcess(file)
         }
         if (!mapping) {
             throw new IllegalArgumentException('Cannot find any suitable mapping for given file')

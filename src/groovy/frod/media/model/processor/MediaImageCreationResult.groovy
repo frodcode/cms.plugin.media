@@ -8,7 +8,12 @@ import frod.media.domain.MediaImage
  */
 class MediaImageCreationResult {
 
-    private MediaImage mediaImage
+    MediaImage mediaImage
 
-    private byte[] content
+    byte[] content
+
+    public MediaImageCreationResult(MediaImage mediaImage, byte[] content) {
+        this.mediaImage = mediaImage
+        this.content = content
+    }
 }

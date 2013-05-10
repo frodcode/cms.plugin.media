@@ -8,6 +8,8 @@ abstract class Media {
 
     MediaGroup mediaGroup
 
+    String typeSlug
+
     static mapping = {
         tablePerHierarchy(false)
     }

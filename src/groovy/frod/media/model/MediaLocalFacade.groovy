@@ -2,7 +2,8 @@ package frod.media.model
 
 import frod.media.domain.MediaGroup
 import frod.media.model.mapping.MappingRegister
-//import org.apache.tika.mime
+import org.apache.tika.mime.MimeType
+import frod.media.model.processor.MediaCreationResult
 
 /**
  * User: freeman
@@ -14,12 +15,17 @@ class MediaLocalFacade {
 
     private MediaFactory mediaFactory
 
-    public def createAssetFromFile(byte[] content, String title, String mimeType, String fileExtension, MediaGroup mediaGroup)
+    public List<MediaCreationResult> createAssetFromFile(File file, String title, MediaGroup mediaGroup)
     {
-        def mapping = mappingRegister.getMappingByFile(content)
+        def mapping = mappingRegister.getMappingByFile(file)
+        List<MediaCreationResult> results = mediaFactory.createMediaFromFileBy(file, title, mapping)
+        results.each {
+            it.getMedia().setMediaGroup(mediaGroup)
+            it.getMedia().setMediaImages(it.mediaImageCreationResults*.getMediaImage())
+            it.getMedia().setTypeSlug(mapping.getSlug())
+        }
 
-        def result = mediaFactory.createMediaFromFileBy(content, title, mapping)
-
+        return results
     }
 
 }

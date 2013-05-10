@@ -8,11 +8,15 @@ import frod.media.domain.Media
  */
 class MediaCreationResult {
 
-    private Media media
+    Media media
 
     /**
      * First id the main
      */
-    private MediaImageCreationResult[] mediaImageCreationResults
+    MediaImageCreationResult[] mediaImageCreationResults
 
+    public MediaCreationResult(Media media, List<MediaImageCreationResult> mediaImageCreationResults) {
+        this.media = media
+        this.mediaImageCreationResults = mediaImageCreationResults
+    }
 }

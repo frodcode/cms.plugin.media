@@ -23,6 +23,7 @@ class ImageProcessor {
 
     public boolean canProcess(File file) {
         def mimeType = mimeTypeGuesser.getMimeType(file);
+        println 'asdfasfd ' + mimeType.toString()
         return ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'].contains(mimeType.toString())
     }
 

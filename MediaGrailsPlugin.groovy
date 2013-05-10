@@ -41,6 +41,7 @@ Brief summary/description of the plugin.
     }
 
     def doWithSpring = {
+        def userDir = System.getProperty("user.dir");
         mediaFacade(frod.media.model.MediaFacade) {
             mappingRegister = ref('mappingRegister')
             mediaLocalFacade = ref('mediaLocalFacade')
@@ -50,7 +51,7 @@ Brief summary/description of the plugin.
             mediaFactory = ref('mediaFactory')
         }
         mappingRegister(frod.media.model.mapping.MappingRegister, [image : ref('imageProcessor')]) {
-            // todo register calls
+
         }
         mediaFactory(frod.media.model.MediaFactory) {
 
@@ -58,7 +59,9 @@ Brief summary/description of the plugin.
 
         // processors
         imageProcessor(frod.media.model.mapping.image.ImageProcessor) {
-
+            mimeTypeGuesser = ref('mimeTypeGuesser')
+            fileExtensionGuesser = ref('fileExtensionGuesser')
+            originalImageRepository = ref('originalImageRepository')
         }
 
         mimeTypeGuesser(frod.media.repository.MimeTypeGuesser) {
@@ -70,13 +73,17 @@ Brief summary/description of the plugin.
         }
 
         // images and files
+        repository_original_image(frod.media.repository.FileRepository, userDir+'/data/images/', '0775', '0775', 'freeman') {
+            filePathAssembler = ref('filePathAssembler')
+        }
 
-        repository_original_image(frod.media.repository.FileRepository) {
-            // todo constructor params
+        filePathAssembler(frod.media.repository.FilePathAssembler) {
+
         }
 
         originalImageRepository(frod.media.image.OriginalImageRepository) {
-
+            fileRepository = ref('repository_original_image')
+            imageKeyToRepoKeyConverter = ref('imageKeyToRepoKeyConverter')
         }
 
         imageKeyToRepoKeyConverter(frod.media.image.ImageKeyToRepoKeyConverter) {

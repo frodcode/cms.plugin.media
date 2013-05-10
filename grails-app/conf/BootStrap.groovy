@@ -7,15 +7,15 @@ import frod.media.domain.Media
 class BootStrap {
 	def init = { ServletContext servletContext ->
 		def ctx = servletContext.getAttribute(ApplicationAttributes.APPLICATION_CONTEXT)
-        Image image = new Image();
-        println 'saving image'
-        Image.findAll()
-        image.save(failOnError: true);
-        Youtube youtube = new Youtube()
-        youtube.youtubeId = 'aa';
-        youtube.save(flush: true)
-
-        println Media.findAll()
+//        Image image = new Image();
+//        println 'saving image'
+//        Image.findAll()
+//        image.save(failOnError: true);
+//        Youtube youtube = new Youtube()
+//        youtube.youtubeId = 'aa';
+//        youtube.save(flush: true)
+//
+//        println Media.findAll()
 
 	}
 }

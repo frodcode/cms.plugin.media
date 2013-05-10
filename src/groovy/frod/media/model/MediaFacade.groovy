@@ -11,9 +11,9 @@ import frod.media.domain.Media
  */
 class MediaFacade {
 
-    private MappingRegister mappingRegister
+    MappingRegister mappingRegister
 
-    private MediaLocalFacade mediaLocalFacade
+    MediaLocalFacade mediaLocalFacade
 
     public def addMediaFromUrl(String url, Long groupId)
     {

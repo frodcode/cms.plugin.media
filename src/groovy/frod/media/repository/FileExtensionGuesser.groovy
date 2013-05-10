@@ -10,7 +10,7 @@ class FileExtensionGuesser {
     public String guessExtension(byte[] content)
     {
         FileDataSource fileDataSource = new FileDataSource()
-        fileDataSource.get
+        fileDataSource
 
     }
 

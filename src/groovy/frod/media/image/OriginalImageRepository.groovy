@@ -8,9 +8,9 @@ import frod.media.repository.FileRepository
  */
 class OriginalImageRepository {
 
-    private FileRepository fileRepository
+    FileRepository fileRepository
 
-    private ImageKeyToRepoKeyConverter imageKeyToRepoKeyConverter
+    ImageKeyToRepoKeyConverter imageKeyToRepoKeyConverter
 
     public void save(byte[] content, ImageKey imageKey)
     {

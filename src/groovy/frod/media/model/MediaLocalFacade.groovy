@@ -11,9 +11,9 @@ import frod.media.model.processor.MediaCreationResult
  */
 class MediaLocalFacade {
 
-    private MappingRegister mappingRegister
+    MappingRegister mappingRegister
 
-    private MediaFactory mediaFactory
+    MediaFactory mediaFactory
 
     public List<MediaCreationResult> createAssetFromFile(File file, String title, MediaGroup mediaGroup)
     {

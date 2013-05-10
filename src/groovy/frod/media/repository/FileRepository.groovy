@@ -6,15 +6,15 @@ package frod.media.repository
  */
 class FileRepository {
 
-    private File root
+    File root
 
-    private String fileMod
+    String fileMod
 
-    private String dirMod
+    String dirMod
 
-    private String group
+    String group
 
-    private FilePathAssembler filePathAssembler
+    FilePathAssembler filePathAssembler
 
     public FileRepository(String root, String fileMod, String dirMod, String group) {
         this.root = new File(root)

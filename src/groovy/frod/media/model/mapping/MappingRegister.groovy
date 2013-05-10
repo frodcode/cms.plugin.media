@@ -35,7 +35,7 @@ class MappingRegister {
     public Mapping getMappingByFile(File file)
     {
         def mapping = mappings.find {
-            it.processor.canProcess(file)
+            it.value.processor.canProcess(file)
         }
         if (!mapping) {
             throw new IllegalArgumentException('Cannot find any suitable mapping for given file')

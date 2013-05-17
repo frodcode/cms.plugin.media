@@ -4,8 +4,6 @@ abstract class Media {
 
     static hasMany = [mediaImages: MediaImage]
 
-    MediaImage mainImage;
-
     MediaGroup mediaGroup
 
     String typeSlug
@@ -15,7 +13,13 @@ abstract class Media {
     }
 
     static constraints = {
-        mainImage(nullable:true)
         mediaImages(nullable:true)
     }
+
+    static transients = ['mainImage']
+
+    public MediaImage getMainImage() {
+        return mediaImages.first()
+    }
+
 }

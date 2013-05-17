@@ -23,7 +23,6 @@ class ImageProcessor {
 
     public boolean canProcess(File file) {
         def mimeType = mimeTypeGuesser.getMimeType(file);
-        println 'asdfasfd ' + mimeType.toString()
         return ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'].contains(mimeType.toString())
     }
 
@@ -36,6 +35,10 @@ class ImageProcessor {
 
         MediaImageCreationResult mediaImageCreationResult = new MediaImageCreationResult(mediaImage, file.getBytes())
         return [new MediaCreationResult(image, [mediaImageCreationResult])]
+//        MediaCreationResult mediaCreationResult = new MediaCreationResult(image, [mediaImageCreationResult]);
+//        ArrayList<MediaCreationResult> list = new ArrayList<MediaCreationResult>()
+//        list.add(mediaCreationResult)
+//        return list;
     }
 
     public List<Media> process(File file, List<MediaCreationResult> mediaCreationResults) {

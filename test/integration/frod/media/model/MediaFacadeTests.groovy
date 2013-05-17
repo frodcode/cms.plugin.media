@@ -39,8 +39,11 @@ class MediaFacadeTests {
     @Test
     void testAddMediaImageFromFile() {
         MediaGroup mediaGroup = getTestingMediaGroup()
-        Media media = mediaFacade.addMediaFromFile(userDir+'/data/test/profil.jpg', mediaGroup.id)
-        assertTrue false
+        List<Media> medias = mediaFacade.addMediaFromFile(userDir+'/data/test/profil.jpg', mediaGroup.id)
+        Media media = medias[0]
+        println media.getMainImage()
         assertTrue originalImageRepository.exists(media.getMainImage())
+        originalImageRepository.remove(media.getMainImage())
+        assertFalse originalImageRepository.exists(media.getMainImage())
     }
 }

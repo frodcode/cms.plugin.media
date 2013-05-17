@@ -1,3 +1,6 @@
+import javax.activation.MimetypesFileTypeMap
+import org.springframework.mail.javamail.ConfigurableMimeFileTypeMap
+
 class MediaGrailsPlugin {
     // the plugin version
     def version = "0.1"
@@ -41,6 +44,9 @@ Brief summary/description of the plugin.
     }
 
     def doWithSpring = {
+
+        configurableMimeFileTypeMap(ConfigurableMimeFileTypeMap)
+
         def userDir = System.getProperty("user.dir");
         mediaFacade(frod.media.model.MediaFacade) {
             mappingRegister = ref('mappingRegister')
@@ -65,7 +71,7 @@ Brief summary/description of the plugin.
         }
 
         mimeTypeGuesser(frod.media.repository.MimeTypeGuesser) {
-
+            configurableMimeFileTypeMap = ref('configurableMimeFileTypeMap');
         }
 
         fileExtensionGuesser(frod.media.repository.FileExtensionGuesser) {

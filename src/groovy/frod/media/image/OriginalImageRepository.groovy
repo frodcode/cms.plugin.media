@@ -33,7 +33,7 @@ class OriginalImageRepository {
     public void remove(ImageKey imageKey)
     {
         String key = getRepoKeyFromImageKey(imageKey)
-        fileRepository.remove(key)
+        fileRepository.delete(key)
     }
 
     private String getRepoKeyFromImageKey(ImageKey imageKey) {

@@ -19,9 +19,12 @@ class MediaLocalFacade {
     {
         def mapping = mappingRegister.getMappingByFile(file)
         List<MediaCreationResult> results = mediaFactory.createMediaFromFileBy(file, title, mapping)
+
         results.each {
             it.getMedia().setMediaGroup(mediaGroup)
-            it.getMedia().setMediaImages(it.mediaImageCreationResults*.getMediaImage())
+            it.mediaImageCreationResults*.mediaImage.each{ mediaImage->
+                it.getMedia().addToMediaImages(mediaImage)
+            }
             it.getMedia().setTypeSlug(mapping.getSlug())
         }
 

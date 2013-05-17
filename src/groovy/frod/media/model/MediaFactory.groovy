@@ -1,6 +1,7 @@
 package frod.media.model
 
 import frod.media.model.processor.MediaCreationResult
+import frod.media.model.mapping.Mapping
 
 /**
  * User: freeman
@@ -9,10 +10,9 @@ import frod.media.model.processor.MediaCreationResult
 class MediaFactory {
 
 
-    public MediaCreationResult createMediaFromFileBy(File file, String title, def mapping)
+    public List<MediaCreationResult> createMediaFromFileBy(File file, String title, Mapping mapping)
     {
         def processor = mapping.processor
-        def result = processor.createAssetFromFile(file, title)
-        return result
+        return processor.createAssetFromFile(file, title)
     }
 }

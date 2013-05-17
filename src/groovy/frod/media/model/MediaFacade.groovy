@@ -31,7 +31,11 @@ class MediaFacade {
         }
         def mapping = mappingRegister.getMappingByFile(file)
         List<MediaCreationResult> results = mediaLocalFacade.createAssetFromFile(file, file.getName(), MediaGroup.findById(groupId))
-        mapping.process(file, results)
+        results.each {result->
+            result.media.mediaImages*.save()
+            result.media.save()
+        }
+        mapping.processor.process(file, results)
     }
 
 }

@@ -1,6 +1,6 @@
 package frod.media.repository
 
-import javax.activation.MimetypesFileTypeMap;
+import org.springframework.mail.javamail.ConfigurableMimeFileTypeMap;
 
 /**
  * User: freeman
@@ -8,6 +8,7 @@ import javax.activation.MimetypesFileTypeMap;
  */
 class MimeTypeGuesser {
 
+    ConfigurableMimeFileTypeMap configurableMimeFileTypeMap;
 
     public String getMimeType(byte[] content)
     {
@@ -18,8 +19,7 @@ class MimeTypeGuesser {
 
     public String getMimeType(File file)
     {
-        MimetypesFileTypeMap mimetypesFileTypeMap = new MimetypesFileTypeMap()
-        return mimetypesFileTypeMap.getContentType(file)
+        return configurableMimeFileTypeMap.getContentType(file)
     }
 
 }

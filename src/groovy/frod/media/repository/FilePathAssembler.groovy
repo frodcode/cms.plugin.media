@@ -8,7 +8,7 @@ class FilePathAssembler {
 
     public String getPath(String root, String key) {
         String fullPathDir = getDirPath(root, key)
-        String fullPath = fullPathDir + key.substring(4, key.length() - 4);
+        String fullPath = fullPathDir + key
 
         return fullPath
     }
@@ -17,7 +17,7 @@ class FilePathAssembler {
         if (key.length() < 4) {
             throw new IllegalArgumentException(sprintf('Cannot create path to file with given key "%s". Key is too short. It must have at least 4 chars', key))
         }
-        String dir = key.substring(0, 2) + "/" + key.substring(2, 2) + '/';
+        String dir = key.substring(0, 2) + "/" + key.substring(2, 4) + '/';
         if (root.endsWith('/')) {
             root = root[0..-1]
         }

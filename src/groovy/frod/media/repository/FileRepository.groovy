@@ -19,10 +19,10 @@ class FileRepository {
     public FileRepository(String root, String fileMod, String dirMod, String group) {
         this.root = new File(root)
         if (!this.root.exists()) {
-            throw new IllegalArgumentException(sprintf('File repository root directory is set to be at path "%s" but the dir does not exist', root))
+            throw new IllegalArgumentException(sprintf('File thumbnail.repository root directory is set to be at path "%s" but the dir does not exist', root))
         }
         if (!this.root.canWrite()) {
-            throw new IllegalArgumentException(sprintf('File repository root directory must be writable. Given path "%s" is not', root))
+            throw new IllegalArgumentException(sprintf('File thumbnail.repository root directory must be writable. Given path "%s" is not', root))
         }
 
         this.fileMod = fileMod

@@ -2,7 +2,6 @@ package frod.media.image
 
 import java.security.MessageDigest
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter
-import grails.util.GrailsUtil
 
 /**
  * User: freeman
@@ -12,16 +11,15 @@ class ImageKeyToRepoKeyConverter {
 
 
     public def convert(ImageKey imageKey) {
-        if (!imageKey.id) {
+        if (!imageKey.getId()) {
             throw new IllegalArgumentException('Image key must content id')
         }
         String title = decompose(imageKey.title)
         MessageDigest md = MessageDigest.getInstance("MD5");
-        //md.digest(imageKey.id.toString().bytes)
-        String md5 = (new HexBinaryAdapter()).marshal(md.digest(imageKey.id.toString().getBytes()))
+        String md5 = (new HexBinaryAdapter()).marshal(md.digest(imageKey.getId().toString().getBytes()))
         String shortedMd5 = md5.substring(0, 7);
         String key =  shortedMd5 + '-' +
-                imageKey.id + '-' +
+                imageKey.getId() + '-' +
                 title;
         if (imageKey.fileExtension) {
             key += '.' + imageKey.fileExtension

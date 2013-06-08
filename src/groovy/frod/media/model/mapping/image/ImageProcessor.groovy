@@ -23,7 +23,7 @@ class ImageProcessor {
 
     public boolean canProcess(File file) {
         def mimeType = mimeTypeGuesser.getMimeType(file);
-        return ['image/gif', 'image/jpg', 'image/jpeg', 'image/png'].contains(mimeType.toString())
+        return ['image/gif', 'image/jpg', 'image/jpeg', 'image/png', 'image/x-png'].contains(mimeType.toString())
     }
 
     public List<MediaCreationResult> createAssetFromFile(File file, String title) {

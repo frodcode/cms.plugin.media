@@ -1,5 +1,13 @@
 import javax.activation.MimetypesFileTypeMap
 import org.springframework.mail.javamail.ConfigurableMimeFileTypeMap
+import frod.media.image.thumbnail.adjustment.AdjustmentProcessorRegister
+import frod.media.image.thumbnail.adjustment.crop.CropProcessor
+import frod.media.image.thumbnail.repository.ThumbnailRepository
+import frod.media.image.thumbnail.repository.ThumbnailGenerator
+import frod.media.url.adjustment.Factory.CropAdjustmentFactory
+import frod.media.url.adjustment.AdjustmentFactoryRegister
+import frod.media.url.adjustment.AdjustmentParser
+import frod.media.url.ImageKeyStringParser
 
 class MediaGrailsPlugin {
     // the plugin version
@@ -92,8 +100,33 @@ Brief summary/description of the plugin.
             imageKeyToRepoKeyConverter = ref('imageKeyToRepoKeyConverter')
         }
 
-        imageKeyToRepoKeyConverter(frod.media.image.ImageKeyToRepoKeyConverter) {
+        imageKeyToRepoKeyConverter(frod.media.image.ImageKeyToRepoKeyConverter)
 
+        cropProcessor(CropProcessor)
+
+        adjustmentProcessorRegister(AdjustmentProcessorRegister, ['crop': ref('cropProcessor')]) {
+        }
+
+        thumbnailRepository(ThumbnailRepository) {
+            originalImageRepository = ref('originalImageRepository')
+            thumbnailGenerator = ref('thumbnailGenerator')
+        }
+
+        thumbnailGenerator(ThumbnailGenerator) {
+            adjustingProcessorRegister('adjustingProcessorRegister')
+        }
+
+        cropAdjustmentFactory(CropAdjustmentFactory)
+
+        adjustmentFactoryRegister(AdjustmentFactoryRegister, ['crop': ref('cropAdjustmentFactory')]) {
+        }
+
+        adjustmentParser(AdjustmentParser) {
+            adjustmentFactoryRegister = ref('adjustmentFactoryRegister')
+        }
+
+        imageKeyStringParser(ImageKeyStringParser) {
+            adjustmentParser = ref('adjustmentParser');
         }
 
     }

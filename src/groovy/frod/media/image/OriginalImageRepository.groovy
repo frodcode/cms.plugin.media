@@ -18,10 +18,10 @@ class OriginalImageRepository {
         fileRepository.save(content, key)
     }
 
-    public void load(ImageKey imageKey)
+    public byte[] load(ImageKey imageKey)
     {
         String key = getRepoKeyFromImageKey(imageKey)
-        fileRepository.load(key)
+        return fileRepository.load(key)
     }
 
     public boolean exists(ImageKey imageKey)

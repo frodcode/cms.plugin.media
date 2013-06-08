@@ -20,6 +20,10 @@ class MediaFacade {
 
     }
 
+    public Media findMediaById(Long id) {
+        return Media.findById(id);
+    }
+
     public List<Media> addMediaFromFile(String path, Long groupId) {
         File file = new File(path)
         return addMediaFromFile(file, groupId)
@@ -31,11 +35,13 @@ class MediaFacade {
         }
         def mapping = mappingRegister.getMappingByFile(file)
         List<MediaCreationResult> results = mediaLocalFacade.createAssetFromFile(file, file.getName(), MediaGroup.findById(groupId))
-        results.each {result->
-            result.media.mediaImages*.save()
-            result.media.save()
+        Media.withTransaction {
+            results.each {result ->
+                result.media.mediaImages*.save()
+                result.media.save()
+            }
+            mapping.processor.process(file, results)
         }
-        mapping.processor.process(file, results)
     }
 
 }

@@ -58,6 +58,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="Media-grailsPlugins" />
+    <orderEntry type="module" module-name="Routing-inplacePlugin" exported="" />
   </component>
 </module>
 

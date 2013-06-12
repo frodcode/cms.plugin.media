@@ -10,6 +10,6 @@ public interface IAdjustmentProcessor {
 
     public boolean canProcess(IAdjustment adjusting);
 
-    public boolean applyAdjustment(BufferedImage image, IAdjustment adjustment);
+    public BufferedImage applyAdjustment(BufferedImage image, IAdjustment adjustment);
 
 }

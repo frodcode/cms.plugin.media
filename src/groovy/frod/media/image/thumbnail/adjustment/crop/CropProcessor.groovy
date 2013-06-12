@@ -18,8 +18,8 @@ class CropProcessor implements IAdjustmentProcessor {
         return false
     }
 
-    public boolean applyAdjustment(BufferedImage image, IAdjustment adjusting) {
-        ICropAdjustment cropAdjusting = (ICropAdjustment) adjusting
+    public BufferedImage applyAdjustment(BufferedImage image, IAdjustment adjustment) {
+        ICropAdjustment cropAdjusting = (ICropAdjustment) adjustment
         return Scalr.crop(image, cropAdjusting.left, cropAdjusting.top, cropAdjusting.width, cropAdjusting.height)
     }
 

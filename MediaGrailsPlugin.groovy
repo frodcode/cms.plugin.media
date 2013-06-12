@@ -8,6 +8,7 @@ import frod.media.url.adjustment.Factory.CropAdjustmentFactory
 import frod.media.url.adjustment.AdjustmentFactoryRegister
 import frod.media.url.adjustment.AdjustmentParser
 import frod.media.url.ImageKeyStringParser
+import frod.media.image.thumbnail.adjustment.resize.ResizeProcessor
 
 class MediaGrailsPlugin {
     // the plugin version
@@ -104,7 +105,9 @@ Brief summary/description of the plugin.
 
         cropProcessor(CropProcessor)
 
-        adjustmentProcessorRegister(AdjustmentProcessorRegister, ['crop': ref('cropProcessor')]) {
+        resizeProcessor(ResizeProcessor)
+
+        adjustmentProcessorRegister(AdjustmentProcessorRegister, ['crop': ref('cropProcessor'), 'resize': ref('resizeProcessor')]) {
         }
 
         thumbnailRepository(ThumbnailRepository) {
@@ -113,7 +116,7 @@ Brief summary/description of the plugin.
         }
 
         thumbnailGenerator(ThumbnailGenerator) {
-            adjustingProcessorRegister('adjustingProcessorRegister')
+            adjustmentProcessorRegister = ref('adjustmentProcessorRegister')
         }
 
         cropAdjustmentFactory(CropAdjustmentFactory)

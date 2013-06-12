@@ -13,13 +13,13 @@ import frod.media.image.thumbnail.adjustment.IAdjustmentProcessor
  */
 class ThumbnailGenerator {
 
-    AdjustmentProcessorRegister adjustingProcessorRegister
+    AdjustmentProcessorRegister adjustmentProcessorRegister
 
     public BufferedImage generateThumbnail(byte[] content, List<IAdjustment> adjustments) {
         InputStream inputStream = new ByteArrayInputStream(content);
         BufferedImage image = ImageIO.read(inputStream);
         for (IAdjustment adjustment in adjustments) {
-            IAdjustmentProcessor processor = adjustingProcessorRegister.getByAdjustment(adjustment)
+            IAdjustmentProcessor processor = adjustmentProcessorRegister.getByAdjustment(adjustment)
             image = processor.applyAdjustment(image, adjustment);
         }
         return image;

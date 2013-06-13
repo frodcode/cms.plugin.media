@@ -18,5 +18,7 @@ class BootStrap {
         mediaGroup.save(flush: true);
 
         List<Media> medias = mediaFacade.addMediaFromFile(userDir+'/data/exampleData/grails.jpg', mediaGroup.id)
+        mediaFacade.addMediaFromFile(userDir+'/data/exampleData/land.jpg', mediaGroup.id)
+        mediaFacade.addMediaFromFile(userDir+'/data/exampleData/big-landscape.jpg', mediaGroup.id)
 	}
 }

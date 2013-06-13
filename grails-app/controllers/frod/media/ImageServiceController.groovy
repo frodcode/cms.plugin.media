@@ -26,19 +26,15 @@ class ImageServiceController {
 
     def index() {
         MediaImage image = Media.findAll()[0].mainImage
-        String key = 'C81E728-2-grails-jpg_resize-100x100-auto.jpg'
-        def matcher = "C81E728" =~ /([A-F0-9]{7})/
-        dump(matcher)
-        dump(matcher.size())
+        //String key = 'C81E728-2-grails-jpg_resize-100x100-auto.jpg'
         // byte[] imageContent = originalImageRepository.load(image)
         //render(text: "<xml>${image.title}</xml>", contentType: "text/xml", encoding: "UTF-8")
-        def keyObject = imageKeyStringParser.getThumbnailKey(key)
-        dump(keyObject)
 
-        dump(image)
+        def keyObject = imageKeyStringParser.getThumbnailKey(params.id)
+        //dump(keyObject)
         response.contentType = 'image/jpeg'
         ResizeAdjustment resizeAdjustment = new ResizeAdjustment(100, 100, Scalr.Mode.AUTOMATIC)
-        response.outputStream.write(thumbnailRepository.loadThumbnail(image, [resizeAdjustment]))
+        response.outputStream.write(thumbnailRepository.loadThumbnail(keyObject.imageKey, keyObject.adjustments))
         //response.outputStream.write(originalImageRepository.load(image))
         response.outputStream.flush()
 

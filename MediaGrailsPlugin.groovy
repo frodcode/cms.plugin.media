@@ -9,6 +9,7 @@ import frod.media.url.adjustment.AdjustmentFactoryRegister
 import frod.media.url.adjustment.AdjustmentParser
 import frod.media.url.ImageKeyStringParser
 import frod.media.image.thumbnail.adjustment.resize.ResizeProcessor
+import frod.media.url.adjustment.Factory.ResizeAdjustmentFactory
 
 class MediaGrailsPlugin {
     // the plugin version
@@ -121,7 +122,9 @@ Brief summary/description of the plugin.
 
         cropAdjustmentFactory(CropAdjustmentFactory)
 
-        adjustmentFactoryRegister(AdjustmentFactoryRegister, ['crop': ref('cropAdjustmentFactory')]) {
+        resizeAdjustmentFactory(ResizeAdjustmentFactory)
+
+        adjustmentFactoryRegister(AdjustmentFactoryRegister, ['crop': ref('cropAdjustmentFactory'), 'resize': ref('resizeAdjustmentFactory')]) {
         }
 
         adjustmentParser(AdjustmentParser) {

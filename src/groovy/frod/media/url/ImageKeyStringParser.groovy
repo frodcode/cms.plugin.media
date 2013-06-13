@@ -19,8 +19,7 @@ class ImageKeyStringParser {
             throw new UrlKeyException(sprintf('Url part "%s" does not match to matcher. Check your url', urlPart));
         }
         def matcher = mainMatcher[0];
-
-        UrlImageKey urlImageKey = new UrlImageKey((int) matcher[2], (String) matcher[3], (String) matcher[5]);
+        UrlImageKey urlImageKey = new UrlImageKey(Integer.parseInt(matcher[2]), (String) matcher[3], (String) matcher[5]);
         String adjustingString = matcher[4]
         List<IAdjustment> adjustments = adjustmentParser.createAdjustments(adjustingString);
         return new UrlThumbnailKey(urlImageKey, adjustments);

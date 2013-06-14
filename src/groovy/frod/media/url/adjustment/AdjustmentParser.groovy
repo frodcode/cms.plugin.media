@@ -37,4 +37,16 @@ class AdjustmentParser {
         return factory.create(params);
     }
 
+    public String getUrlPartFromAdjustments(List<IAdjustment> adjustments) {
+        String urlPart = ''
+        adjustments.each { adjustment ->
+            FactoryRegisterEntry registerEntry = adjustmentFactoryRegister.getFactoryEntryByAdjustment(adjustment)
+            urlPart += registerEntry.slug + '-'
+            urlPart += registerEntry.factory.createUrlPartFromAdjustment(adjustment)
+            urlPart += '_'
+        }
+        urlPart = urlPart[0..-2]
+        return urlPart
+    }
+
 }

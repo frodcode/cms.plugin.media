@@ -9,4 +9,9 @@ import frod.media.image.thumbnail.adjustment.IAdjustment
 public interface IAdjustmentFactory {
 
     public IAdjustment create(String params);
+
+    public String createUrlPartFromAdjustment(IAdjustment adjustment);
+
+    public boolean canCreateUrlPart(IAdjustment adjustment)
+
 }

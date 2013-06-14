@@ -13,6 +13,7 @@ import frod.media.image.thumbnail.adjustment.crop.CropAdjustment
 import frod.media.image.thumbnail.adjustment.resize.ResizeAdjustment
 import org.imgscalr.Scalr
 import frod.media.url.ImageKeyStringParser
+import frod.media.url.UrlThumbnailKey
 
 class ImageServiceController {
 
@@ -25,14 +26,20 @@ class ImageServiceController {
     ImageKeyStringParser imageKeyStringParser;
 
     def index() {
-        MediaImage image = Media.findAll()[0].mainImage
-        //String key = 'C81E728-2-grails-jpg_resize-100x100-auto.jpg'
-        // byte[] imageContent = originalImageRepository.load(image)
-        //render(text: "<xml>${image.title}</xml>", contentType: "text/xml", encoding: "UTF-8")
+        def urlPart = params.id
+        UrlThumbnailKey keyObject = imageKeyStringParser.getThumbnailKey(urlPart)
+        MediaImage image = MediaImage.findById(keyObject.imageKey.id)
+        if (!image) {
+            response.sendError(404, sprintf('Image with id "%s" was not found'));
+            return;
+        }
+        String correctUrlPart = imageKeyStringParser.getUrlPart(image, keyObject.adjustments)
+        if (correctUrlPart != urlPart) {
+            redirect(id: correctUrlPart)
+            return
+        }
 
-        def keyObject = imageKeyStringParser.getThumbnailKey(params.id)
-        //dump(keyObject)
-        response.contentType = 'image/jpeg'
+        response.contentType = image.mimeType
         ResizeAdjustment resizeAdjustment = new ResizeAdjustment(100, 100, Scalr.Mode.AUTOMATIC)
         response.outputStream.write(thumbnailRepository.loadThumbnail(keyObject.imageKey, keyObject.adjustments))
         //response.outputStream.write(originalImageRepository.load(image))

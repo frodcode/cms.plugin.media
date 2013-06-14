@@ -35,10 +35,6 @@ class ImageProcessor {
 
         MediaImageCreationResult mediaImageCreationResult = new MediaImageCreationResult(mediaImage, file.getBytes())
         return [new MediaCreationResult(image, [mediaImageCreationResult])]
-//        MediaCreationResult mediaCreationResult = new MediaCreationResult(image, [mediaImageCreationResult]);
-//        ArrayList<MediaCreationResult> list = new ArrayList<MediaCreationResult>()
-//        list.add(mediaCreationResult)
-//        return list;
     }
 
     public List<Media> process(File file, List<MediaCreationResult> mediaCreationResults) {
@@ -46,6 +42,13 @@ class ImageProcessor {
         MediaImage mediaImage = mediaCreationResults[0].mediaImageCreationResults[0].mediaImage;
         originalImageRepository.save(content, mediaImage)
         return [mediaCreationResults[0].media]
+    }
+
+    public boolean canProcess(URL url) {
+        String html = url.getText()
+        XmlSlurper slurper = new XmlSlurper()
+        def titleEl = slurper.find {it.name() == 'title'}
+        dump(titleEl)
     }
 
 }

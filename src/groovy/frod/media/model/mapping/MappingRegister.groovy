@@ -1,17 +1,15 @@
 package frod.media.model.mapping
 
-import frod.media.domain.Media
-
 /**
  * User: freeman
  * Date: 3.5.13
  */
 class MappingRegister {
 
-    private mappings = [:]
+    private fileMappings = [:]
 
-    MappingRegister(LinkedHashMap<String, Object> mappingsToRegister) {
-        mappingsToRegister.each {
+    MappingRegister(LinkedHashMap<String, Object> fileMappingsToRegister) {
+        fileMappingsToRegister.each {
             register(it.key, it.value)
         }
     }
@@ -21,12 +19,12 @@ class MappingRegister {
         if (hasMapping(slug)) {
             throw new IllegalArgumentException(sprintf('Processor with slug "%s" is already registered.', slug))
         }
-        mappings[slug] = new Mapping(processor, slug)
+        fileMappings[slug] = new Mapping(processor, slug)
     }
 
     public boolean hasMapping(String slug)
     {
-        if (mappings[slug]) {
+        if (fileMappings[slug]) {
             return true;
         }
         return false;
@@ -34,7 +32,7 @@ class MappingRegister {
 
     public Mapping getMappingByFile(File file)
     {
-        Mapping mapping = mappings.find {
+        Mapping mapping = fileMappings.find {
             it.value.processor.canProcess(file)
         }?.value
         if (!mapping) {

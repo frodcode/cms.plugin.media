@@ -1,6 +1,7 @@
 package frod.media.url.adjustment
 
 import frod.media.url.adjustment.Factory.IAdjustmentFactory
+import frod.media.image.thumbnail.adjustment.IAdjustment
 
 /**
  * User: freeman
@@ -8,7 +9,7 @@ import frod.media.url.adjustment.Factory.IAdjustmentFactory
  */
 class AdjustmentFactoryRegister {
 
-    private LinkedHashMap<String, IAdjustmentFactory> factories = [:]
+    private List<IAdjustmentFactory> factoryEntries = []
 
     AdjustmentFactoryRegister(LinkedHashMap<String, IAdjustmentFactory> factories) {
         factories.each {
@@ -17,23 +18,40 @@ class AdjustmentFactoryRegister {
     }
 
     public void register(String slug, IAdjustmentFactory factory) {
-        if (hasFactory(slug)) {
+        if (hasFactoryEntry(slug)) {
             throw new IllegalArgumentException(sprintf('Factory with slug "%s" is already registered.', slug))
         }
-        factories[slug] = factory
+        factoryEntries.add(new FactoryRegisterEntry(slug, factory))
     }
 
-    public boolean hasFactory(String slug) {
-        if (factories[slug]) {
-            return true;
+    public boolean hasFactoryEntry(String slug) {
+        for (FactoryRegisterEntry entry in factoryEntries) {
+            if (entry.slug == slug) {
+                return true;
+            }
         }
         return false;
     }
 
     public IAdjustmentFactory getFactoryBySlug(String slug) {
-        if (!hasFactory(slug)) {
+        if (!hasFactoryEntry(slug)) {
             throw new IllegalArgumentException(sprintf('Cannot find any suitable mapping for slug "%s"', slug))
         }
-        return factories[slug]
+        for (FactoryRegisterEntry entry in factoryEntries) {
+            if (slug == entry.slug) {
+                return entry.factory
+            }
+        }
     }
+
+    public FactoryRegisterEntry getFactoryEntryByAdjustment(IAdjustment adjustment) {
+        for (FactoryRegisterEntry factoryEntry in factoryEntries) {
+            if (factoryEntry.factory.canCreateUrlPart(adjustment)) {
+                return factoryEntry
+            }
+        }
+        throw new IllegalArgumentException(sprintf('Cannot find any suitable factory for adjustment with type "%s"', adjustment.class.name))
+    }
+
+
 }

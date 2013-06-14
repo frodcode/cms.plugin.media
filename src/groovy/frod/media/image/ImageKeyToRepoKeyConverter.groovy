@@ -2,6 +2,7 @@ package frod.media.image
 
 import java.security.MessageDigest
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter
+import frod.media.utils.StringUtils
 
 /**
  * User: freeman
@@ -9,12 +10,11 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter
  */
 class ImageKeyToRepoKeyConverter {
 
-
     public def convert(ImageKey imageKey) {
         if (!imageKey.getId()) {
             throw new IllegalArgumentException('Image key must content id')
         }
-        String title = decompose(imageKey.title)
+        String title = StringUtils.webalize(imageKey.title)
         MessageDigest md = MessageDigest.getInstance("MD5");
         String md5 = (new HexBinaryAdapter()).marshal(md.digest(imageKey.getId().toString().getBytes()))
         String shortedMd5 = md5.substring(0, 7);
@@ -27,7 +27,4 @@ class ImageKeyToRepoKeyConverter {
         return key
     }
 
-    private String decompose(String s) {
-        return java.text.Normalizer.normalize(s, java.text.Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "").replace('.', '-')
-    }
 }

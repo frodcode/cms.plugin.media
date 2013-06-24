@@ -24,7 +24,7 @@ class ImageKeyToRepoKeyConverter {
         if (imageKey.fileExtension) {
             key += '.' + imageKey.fileExtension
         }
-        return key
+        return key.toLowerCase()
     }
 
 }

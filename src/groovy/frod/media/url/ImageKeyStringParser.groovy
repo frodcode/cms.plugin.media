@@ -17,7 +17,7 @@ class ImageKeyStringParser {
     AdjustmentParser adjustmentParser
 
     public UrlThumbnailKey getThumbnailKey(String urlPart) {
-        def regexPattern = /^([A-F0-9]{7})-([0-9]*)-([a-z0-9-]*)_([a-z0-9-_]*)\.([a-z]*)$/;
+        def regexPattern = /^([a-f0-9]{7})-([0-9]*)-([a-z0-9-]*)_([a-z0-9-_]*)\.([a-z]*)$/;
         def mainMatcher = urlPart =~ regexPattern
         if (mainMatcher.size() == 0) {
             throw new UrlKeyException(sprintf('Url part "%s" does not match to matcher. Check your url', urlPart));
@@ -46,7 +46,7 @@ class ImageKeyStringParser {
         if (imageKey.fileExtension) {
             urlPart += '.' + imageKey.fileExtension
         }
-        return urlPart;
+        return urlPart.toLowerCase();
     }
 
 }

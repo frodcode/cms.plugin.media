@@ -19,7 +19,17 @@ class MediaLocalFacade {
     {
         def mapping = mappingRegister.getMappingByFile(file)
         List<MediaCreationResult> results = mediaFactory.createMediaFromFileBy(file, title, mapping)
+        return saveResults(results, mediaGroup, mapping)
+    }
 
+    public List<MediaCreationResult> createAssetFromUrl(URL url, MediaGroup mediaGroup)
+    {
+        def mapping = mappingRegister.getMappingByUrl(url)
+        List<MediaCreationResult> results = mapping.processor.createAssetFromUrl(url)
+        return saveResults(results, mediaGroup, mapping)
+    }
+
+    private List<MediaCreationResult> saveResults(List<MediaCreationResult> results, MediaGroup mediaGroup, def mapping) {
         results.each {
             it.getMedia().setMediaGroup(mediaGroup)
             it.mediaImageCreationResults*.mediaImage.each{ mediaImage->

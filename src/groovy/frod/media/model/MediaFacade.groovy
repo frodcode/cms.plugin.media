@@ -15,9 +15,18 @@ class MediaFacade {
 
     MediaLocalFacade mediaLocalFacade
 
-    public def addMediaFromUrl(String url, Long groupId)
+    public def addMediaFromUrl(String urlString, Long groupId)
     {
-
+        URL url = urlString.toURL()
+        def mapping = mappingRegister.getMappingByUrl(url)
+        List<MediaCreationResult> results = mediaLocalFacade.createAssetFromUrl(url, MediaGroup.findById(groupId))
+        Media.withTransaction {
+            results.each {result ->
+                result.media.mediaImages*.save()
+                result.media.save()
+            }
+            mapping.processor.process(url, results)
+        }
     }
 
     public Media findMediaById(Long id) {

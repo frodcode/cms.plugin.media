@@ -25,4 +25,10 @@ class MediaController {
         mediaFacade.addMediaFromFile(savedFile, group.id)
         redirect(action: 'index')
     }
+
+    def fromUrl() {
+        MediaGroup group = MediaGroup.findAll()[0]
+        mediaFacade.addMediaFromUrl(params.url, group.id)
+        redirect(action: 'index')
+    }
 }

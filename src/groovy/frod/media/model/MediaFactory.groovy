@@ -15,4 +15,10 @@ class MediaFactory {
         def processor = mapping.processor
         return processor.createAssetFromFile(file, title)
     }
+
+    public List<MediaCreationResult> createMediaFromUrlBy(URL url, String title, Mapping mapping)
+    {
+        def processor = mapping.processor
+        return processor.createAssetFromUrl(url, title)
+    }
 }

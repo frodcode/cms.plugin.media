@@ -10,6 +10,8 @@ import frod.media.url.adjustment.AdjustmentParser
 import frod.media.url.ImageKeyStringParser
 import frod.media.image.thumbnail.adjustment.resize.ResizeProcessor
 import frod.media.url.adjustment.Factory.ResizeAdjustmentFactory
+import frod.media.download.ContentDownloader
+import frod.media.download.CachedContentDownloader
 
 class MediaGrailsPlugin {
     // the plugin version
@@ -49,8 +51,7 @@ Brief summary/description of the plugin.
     // Online location of the plugin's browseable source code.
 //    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
 
-    def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before
+    def doWithWebDescriptor = { webXml ->
     }
 
     def doWithSpring = {
@@ -66,7 +67,7 @@ Brief summary/description of the plugin.
             mappingRegister = ref('mappingRegister')
             mediaFactory = ref('mediaFactory')
         }
-        mappingRegister(frod.media.model.mapping.MappingRegister, [image : ref('imageProcessor')]) {
+        mappingRegister(frod.media.model.mapping.MappingRegister, [image : ref('imageProcessor')], [image : ref('imageProcessor')]) {
 
         }
         mediaFactory(frod.media.model.MediaFactory) {
@@ -78,6 +79,7 @@ Brief summary/description of the plugin.
             mimeTypeGuesser = ref('mimeTypeGuesser')
             fileExtensionGuesser = ref('fileExtensionGuesser')
             originalImageRepository = ref('originalImageRepository')
+            contentDownloader = ref('cachedContentDownloader')
         }
 
         mimeTypeGuesser(frod.media.repository.MimeTypeGuesser) {
@@ -133,6 +135,12 @@ Brief summary/description of the plugin.
 
         imageKeyStringParser(ImageKeyStringParser) {
             adjustmentParser = ref('adjustmentParser');
+        }
+
+        contentDownloader(ContentDownloader)
+
+        cachedContentDownloader(CachedContentDownloader) {
+            contentDownloader = ref('contentDownloader')
         }
 
     }

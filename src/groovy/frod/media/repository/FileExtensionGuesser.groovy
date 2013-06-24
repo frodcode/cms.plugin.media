@@ -18,4 +18,13 @@ class FileExtensionGuesser {
     {
         return file.getName().tokenize('.').last()
     }
+
+    public String getExtension(URL url)
+    {
+        String ext = url.toString().tokenize('.').last()
+        if (ext) {
+            return ext;
+        }
+        throw new IllegalArgumentException(sprintf('Not implemented yet but should recognize extension from content type for url "%s"', url))
+    }
 }

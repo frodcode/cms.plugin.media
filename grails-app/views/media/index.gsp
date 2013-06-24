@@ -26,6 +26,10 @@
         <span>Add new: </span><input type="file" name="file"/>
         <input type="submit" value="Upload" />
     </g:form>
+    <g:form controller="Media" action="fromUrl" method="post">
+        <span>Add new: </span><input type="text" name="url"/>
+        <input type="submit" value="Process" />
+    </g:form>
 </table>
 </body>
 </html>

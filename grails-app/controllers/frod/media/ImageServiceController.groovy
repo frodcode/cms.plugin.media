@@ -42,11 +42,11 @@ class ImageServiceController {
         response.contentType = image.mimeType
         ResizeAdjustment resizeAdjustment = new ResizeAdjustment(100, 100, Scalr.Mode.AUTOMATIC)
         response.outputStream.write(thumbnailRepository.loadThumbnail(keyObject.imageKey, keyObject.adjustments))
-        //response.outputStream.write(originalImageRepository.load(image))
+        //entity.contentOutputStream.write(originalImageRepository.load(image))
         response.outputStream.flush()
 
         //render(contentType: 'image/png') {
-            //response.outputStream << originalImageRepository.load(image)
+            //entity.contentOutputStream << originalImageRepository.load(image)
         //}
     }
 }

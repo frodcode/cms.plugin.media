@@ -14,6 +14,7 @@ grails.project.dependency.resolution = {
         grailsCentral()
         mavenRepo "http://maven.thebuzzmedia.com"
         mavenRepo "http://repo1.maven.org/maven2"
+        mavenRepo "http://repository.codehaus.org"
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
         //mavenLocal()
@@ -27,6 +28,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.21'
+        runtime group: 'org.codehaus.groovy.modules.http-builder',
+                name: 'http-builder',
+                version: '0.5.2'
         compile group: 'org.imgscalr',
                 name: 'imgscalr-lib',
                 version:'4.2'

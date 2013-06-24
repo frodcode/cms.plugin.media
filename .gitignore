@@ -24,3 +24,5 @@ stacktrace.log
 /*.tmproj
 /ivy*
 /eclipse
+
+/data/images/**

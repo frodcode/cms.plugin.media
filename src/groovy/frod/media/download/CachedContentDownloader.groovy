@@ -14,7 +14,6 @@ class CachedContentDownloader implements IContentDownloader {
 
     @Override
     DownloadedContent getContentFromUrl(URL url) {
-        dump(this)
         if (knownUrls.containsKey(url)) {
             return knownUrls[url]
         }

@@ -18,4 +18,8 @@ class UrlUtils {
         return URLDecoder.decode(betterTitle.replaceAll('-', ' ').replaceAll('_', ' '))
     }
 
+    public static LinkedHashMap<String, Object> parseUrlParams(URL url) {
+        return url.query.split('&').inject([:]) {map, kv -> def (key, value) = kv.split('=').toList(); map[key] = value != null ? URLDecoder.decode(value) : null; map }
+    }
+
 }

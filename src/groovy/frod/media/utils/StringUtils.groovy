@@ -15,6 +15,9 @@ class StringUtils {
         webPath = webPath.toLowerCase()
         webPath = Normalizer.normalize(webPath, java.text.Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
         webPath = (webPath =~ /[^a-z0-9]/).replaceAll("-")
+        while(webPath.contains('--')) {
+            webPath = (webPath =~ /--/).replaceAll("-")
+        }
         if (webPath.endsWith('-')) {
             webPath = webPath[0..-2]
         }

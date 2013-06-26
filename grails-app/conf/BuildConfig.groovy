@@ -28,6 +28,9 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.21'
+        compile group: 'org.ccil.cowan.tagsoup',
+                name: 'tagsoup',
+                version: '1.2'
         runtime group: 'org.codehaus.groovy.modules.http-builder',
                 name: 'http-builder',
                 version: '0.5.2'

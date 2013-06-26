@@ -12,6 +12,7 @@ import frod.media.image.thumbnail.adjustment.resize.ResizeProcessor
 import frod.media.url.adjustment.Factory.ResizeAdjustmentFactory
 import frod.media.download.ContentDownloader
 import frod.media.download.CachedContentDownloader
+import frod.media.model.mapping.youtube.YoutubeProcessor
 
 class MediaGrailsPlugin {
     // the plugin version
@@ -67,7 +68,9 @@ Brief summary/description of the plugin.
             mappingRegister = ref('mappingRegister')
             mediaFactory = ref('mediaFactory')
         }
-        mappingRegister(frod.media.model.mapping.MappingRegister, [image : ref('imageProcessor')], [image : ref('imageProcessor')]) {
+        mappingRegister(frod.media.model.mapping.MappingRegister,
+                [image : ref('imageProcessor')],
+                [image : ref('imageProcessor'), youtube: ref('youtubeProcessor')]) {
 
         }
         mediaFactory(frod.media.model.MediaFactory) {
@@ -77,6 +80,12 @@ Brief summary/description of the plugin.
         // processors
         imageProcessor(frod.media.model.mapping.image.ImageProcessor) {
             mimeTypeGuesser = ref('mimeTypeGuesser')
+            fileExtensionGuesser = ref('fileExtensionGuesser')
+            originalImageRepository = ref('originalImageRepository')
+            contentDownloader = ref('cachedContentDownloader')
+        }
+
+        youtubeProcessor(YoutubeProcessor) {
             fileExtensionGuesser = ref('fileExtensionGuesser')
             originalImageRepository = ref('originalImageRepository')
             contentDownloader = ref('cachedContentDownloader')
@@ -140,6 +149,7 @@ Brief summary/description of the plugin.
         contentDownloader(ContentDownloader)
 
         cachedContentDownloader(CachedContentDownloader) {
+            // should be scoped by request
             contentDownloader = ref('contentDownloader')
         }
 

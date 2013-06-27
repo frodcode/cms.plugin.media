@@ -36,7 +36,7 @@ class YoutubeProcessor {
         def slurper = new XmlSlurper(tagsoupParser)
         def parsedSlurper = slurper.parseText(html)
         String title = parsedSlurper."**".find {it.name() == 'title'}.text()
-        dump(title);
+
         List<MediaImageCreationResult> resultList = []
         Youtube youtube = new Youtube()
         String youtubeId = UrlUtils.parseUrlParams(url).v;
@@ -47,7 +47,7 @@ class YoutubeProcessor {
             MediaImage mediaImage = new MediaImage()
             mediaImage.mimeType = downloadedContentImage.entity.contentType.value
             mediaImage.fileExtension = fileExtensionGuesser.getExtension(imageUrl)
-            mediaImage.title = title + '('+youtubeImagePatterns.indexOf(it)+')'
+            mediaImage.title = title
             MediaImageCreationResult mediaImageCreationResult = new MediaImageCreationResult(mediaImage, downloadedContentImage.contentOutputStream.toByteArray())
             resultList.add(mediaImageCreationResult)
         }

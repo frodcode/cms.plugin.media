@@ -2,7 +2,7 @@ package frod.media.domain
 
 import frod.media.image.ImageKey
 
-class MediaImage implements ImageKey {
+class MediaImage implements ImageKey, Comparable {
 
     Integer id
 
@@ -12,7 +12,13 @@ class MediaImage implements ImageKey {
 
     String mimeType
 
+    Integer position
+
     static constraints = {
+    }
+
+    int compareTo(obj) {
+        position.compareTo(obj.position)
     }
 
 }

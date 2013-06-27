@@ -11,18 +11,9 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/hibernate-2.2.0" />
-    <content url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/release-2.2.0">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/release-2.2.0/src/java" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/release-2.2.0/src/groovy" isTestSource="false" />
-    </content>
-    <content url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/rest-client-builder-1.0.3">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/rest-client-builder-1.0.3/src/groovy" isTestSource="false" />
-    </content>
-    <content url="file://$USER_HOME$/.grails/2.2.0/projects/Media/plugins/tomcat-2.2.0" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="grails-2.2.0" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="grails-2.2.3" level="application" />
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (Media-grailsPlugins)">
         <CLASSES>

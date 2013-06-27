@@ -32,8 +32,11 @@ class MediaLocalFacade {
     private List<MediaCreationResult> saveResults(List<MediaCreationResult> results, MediaGroup mediaGroup, def mapping) {
         results.each {
             it.getMedia().setMediaGroup(mediaGroup)
+            def position = 1;
             it.mediaImageCreationResults*.mediaImage.each{ mediaImage->
+                mediaImage.position = position;
                 it.getMedia().addToMediaImages(mediaImage)
+                position++;
             }
             it.getMedia().setTypeSlug(mapping.getSlug())
         }

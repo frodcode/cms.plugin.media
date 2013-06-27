@@ -2,6 +2,8 @@ package frod.media.domain
 
 abstract class Media {
 
+    SortedSet mediaImages
+
     static hasMany = [mediaImages: MediaImage]
 
     MediaGroup mediaGroup

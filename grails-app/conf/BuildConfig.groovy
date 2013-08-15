@@ -9,16 +9,17 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
     repositories {
         grailsCentral()
+
+        // uncomment the below to enable remote dependency resolution
+        // from public Maven repositories
+        // mavenLocal()
+        mavenCentral()
         mavenRepo "http://maven.thebuzzmedia.com"
         mavenRepo "http://repo1.maven.org/maven2"
         mavenRepo "http://repository.codehaus.org"
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
-        //mavenLocal()
-        //mavenCentral()
         //mavenRepo "http://snapshots.thumbnail.repository.codehaus.org"
         //mavenRepo "http://thumbnail.repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -53,3 +54,4 @@ grails.project.dependency.resolution = {
 }
 
 grails.plugin.location.Routing = "../Diagnostics"
+

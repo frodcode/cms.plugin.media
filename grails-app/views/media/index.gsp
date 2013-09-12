@@ -17,8 +17,8 @@
             <g:set var="imgLink" value="${createLink([controller: 'imageService', id: keyParser.getUrlPart(media.mainImage, [new ResizeAdjustment(200, 200, Scalr.Mode.AUTOMATIC)])])}"/>
             <td>${media.id}</td>
             <td>${media.mainImage.title}</td>
-            <td><g:img uri="${imgLink}"></g:img></td>
-            <td><g:link uri="${imgLink}">${imgLink}</g:link></td>
+            <td><frodm:img media="${media}" adjustments="${[new ResizeAdjustment(200, 200, Scalr.Mode.AUTOMATIC)]}"/></td>
+            <td><frodm:imgLink media="${media}" adjustments="${[new ResizeAdjustment(500, 500, Scalr.Mode.AUTOMATIC)]}">${frodm.imgUri([media: media,adjustments: [new ResizeAdjustment(200, 200, Scalr.Mode.AUTOMATIC)]])}</frodm:imgLink> </td>
         </tr>
     </g:each>
 

@@ -13,10 +13,11 @@ import frod.media.url.adjustment.Factory.ResizeAdjustmentFactory
 import frod.media.download.ContentDownloader
 import frod.media.download.CachedContentDownloader
 import frod.media.model.mapping.youtube.YoutubeProcessor
+import frod.media.MediaTagLib
 
 class MediaGrailsPlugin {
     // the plugin version
-    def version = "0.2"
+    def version = "0.3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // resources that are excluded from plugin packaging
@@ -151,6 +152,10 @@ Media of any type
         cachedContentDownloader(CachedContentDownloader) {
             // should be scoped by request
             contentDownloader = ref('contentDownloader')
+        }
+
+        'frod.media.MediaTagLib'(MediaTagLib) {
+            imageKeyStringParser = ref('imageKeyStringParser')
         }
 
     }

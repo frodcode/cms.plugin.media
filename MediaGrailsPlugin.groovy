@@ -16,7 +16,7 @@ import frod.media.model.mapping.youtube.YoutubeProcessor
 
 class MediaGrailsPlugin {
     // the plugin version
-    def version = "0.1"
+    def version = "0.2"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // resources that are excluded from plugin packaging
@@ -27,9 +27,9 @@ class MediaGrailsPlugin {
     // TODO Fill in these fields
     def title = "Media Plugin" // Headline display name of the plugin
     def author = "Your name"
-    def authorEmail = ""
+    def authorEmail = "franta.odehnal@gmail.com"
     def description = '''\
-Brief summary/description of the plugin.
+Media of any type
 '''
 
     // URL to the plugin's documentation

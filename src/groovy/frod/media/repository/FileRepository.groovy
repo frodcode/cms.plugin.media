@@ -65,7 +65,8 @@ class FileRepository {
     {
         checkExists(key)
         FileInputStream fileInputStream = new FileInputStream(getPath(key))
-        return fileInputStream.getBytes()
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream, 10240)
+        return bufferedInputStream.getBytes()
     }
 
     public void delete(def key)

@@ -6,6 +6,8 @@ class MediaGroup {
 
     String description
 
+    MediaGroupType type
+
     static constraints = {
         description(nullable:true)
     }

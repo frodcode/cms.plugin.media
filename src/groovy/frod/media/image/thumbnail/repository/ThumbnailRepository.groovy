@@ -5,12 +5,8 @@ import frod.media.image.ImageKey
 
 import frod.media.image.OriginalImageRepository
 import frod.media.image.thumbnail.adjustment.IAdjustment
-import java.awt.image.DataBufferByte
+
 import javax.imageio.ImageIO
-import java.awt.image.WritableRaster
-import com.sun.image.codec.jpeg.JPEGCodec
-import com.sun.image.codec.jpeg.JPEGImageDecoder
-import java.awt.image.DataBufferInt
 
 /**
  * User: freeman
@@ -28,9 +24,9 @@ class ThumbnailRepository {
         }
     }
 
-    private byte[] bufferedImageToBytArray(BufferedImage image) {
+    private byte[] bufferedImageToByteArray(BufferedImage image, ImageKey key) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", baos);
+        ImageIO.write(image, key.getFileExtension(), baos);
         baos.flush();
         byte[] convertedContent = baos.toByteArray();
         baos.close();
@@ -40,7 +36,7 @@ class ThumbnailRepository {
     public byte[] generateThumbnail(ImageKey key, List<IAdjustment> adjustments) {
         checkOriginalExists(key)
         def image = thumbnailGenerator.generateThumbnail(originalImageRepository.load(key), adjustments)
-        return bufferedImageToBytArray(image)
+        return bufferedImageToByteArray(image, key)
     }
 
     public byte[] loadThumbnail(ImageKey key, List<IAdjustment> adjustments) {

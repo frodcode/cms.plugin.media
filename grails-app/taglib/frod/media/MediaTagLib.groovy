@@ -41,7 +41,7 @@ class MediaTagLib {
     def imgLink = {attrs, body ->
         MediaImage mediaImage = getMediaImageFromAttrs(attrs)
         def adjustments = getAdjustments(attrs)
-        def myAttrs = [url: [controller: 'imageService', id: imageKeyStringParser.getUrlPart(mediaImage, adjustments)]]
+        def myAttrs = [mapping: 'dynamicImage', params: [id: imageKeyStringParser.getUrlPart(mediaImage, adjustments)]]
         out << g.link(attrs + myAttrs, body)
     }
 
@@ -69,7 +69,7 @@ class MediaTagLib {
 
     private def getImageUri(MediaImage mediaImage, def attrs) {
         List<IAdjustment> adjustments = getAdjustments(attrs)
-        return createLink([controller: 'imageService', id: imageKeyStringParser.getUrlPart(mediaImage, adjustments)])
+        return createLink([mapping: 'dynamicImage', params: [id: imageKeyStringParser.getUrlPart(mediaImage, adjustments)]])
     }
 
 }

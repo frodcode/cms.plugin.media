@@ -21,6 +21,7 @@
             <td><frodm:imgLink media="${media}" adjustments="${[new ResizeAdjustment(500, 500, Scalr.Mode.AUTOMATIC)]}">${frodm.imgUri([media: media,adjustments: [new ResizeAdjustment(200, 200, Scalr.Mode.AUTOMATIC)]])}</frodm:imgLink> </td>
         </tr>
     </g:each>
+    <g:link mapping="dynamicImage" params="[id: 'super']">adfasf</g:link>
 
     <g:form controller="Media" action="upload" method="post" enctype="multipart/form-data">
         <span>Add new: </span><input type="file" name="file"/>

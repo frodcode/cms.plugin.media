@@ -17,7 +17,7 @@ import frod.media.MediaTagLib
 
 class MediaGrailsPlugin {
     // the plugin version
-    def version = "0.4"
+    def version = "1.3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // resources that are excluded from plugin packaging
@@ -61,6 +61,9 @@ Media of any type
         configurableMimeFileTypeMap(ConfigurableMimeFileTypeMap)
 
         def userDir = System.getProperty("user.dir");
+        if (application.config.grails.media.preferences?.imageDir) {
+            userDir = application.config.grails.media.preferences.imageDir
+        }
         mediaFacade(frod.media.model.MediaFacade) {
             mappingRegister = ref('mappingRegister')
             mediaLocalFacade = ref('mediaLocalFacade')

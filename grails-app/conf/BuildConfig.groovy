@@ -9,7 +9,7 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    legacyResolve true // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
     repositories {
         grailsCentral()
 
@@ -60,5 +60,5 @@ grails.project.dependency.resolution = {
     }
 }
 
-grails.plugin.location.Routing = "../Diagnostics"
+// grails.plugin.location.Routing = "../Diagnostics"
 

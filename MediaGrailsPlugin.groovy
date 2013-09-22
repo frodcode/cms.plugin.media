@@ -10,14 +10,11 @@ import frod.media.url.adjustment.AdjustmentParser
 import frod.media.url.ImageKeyStringParser
 import frod.media.image.thumbnail.adjustment.resize.ResizeProcessor
 import frod.media.url.adjustment.Factory.ResizeAdjustmentFactory
-import frod.media.download.ContentDownloader
-import frod.media.download.CachedContentDownloader
-import frod.media.model.mapping.youtube.YoutubeProcessor
 import frod.media.MediaTagLib
 
 class MediaGrailsPlugin {
     // the plugin version
-    def version = "1.3"
+    def version = "1.4"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // resources that are excluded from plugin packaging
@@ -74,7 +71,7 @@ Media of any type
         }
         mappingRegister(frod.media.model.mapping.MappingRegister,
                 [image : ref('imageProcessor')],
-                [image : ref('imageProcessor'), youtube: ref('youtubeProcessor')]) {
+                [image : ref('imageProcessor')]) {
 
         }
         mediaFactory(frod.media.model.MediaFactory) {
@@ -86,13 +83,6 @@ Media of any type
             mimeTypeGuesser = ref('mimeTypeGuesser')
             fileExtensionGuesser = ref('fileExtensionGuesser')
             originalImageRepository = ref('originalImageRepository')
-            contentDownloader = ref('cachedContentDownloader')
-        }
-
-        youtubeProcessor(YoutubeProcessor) {
-            fileExtensionGuesser = ref('fileExtensionGuesser')
-            originalImageRepository = ref('originalImageRepository')
-            contentDownloader = ref('cachedContentDownloader')
         }
 
         mimeTypeGuesser(frod.media.repository.MimeTypeGuesser) {
@@ -148,13 +138,6 @@ Media of any type
 
         imageKeyStringParser(ImageKeyStringParser) {
             adjustmentParser = ref('adjustmentParser');
-        }
-
-        contentDownloader(ContentDownloader)
-
-        cachedContentDownloader(CachedContentDownloader) {
-            // should be scoped by request
-            contentDownloader = ref('contentDownloader')
         }
 
         'frod.media.MediaTagLib'(MediaTagLib) {

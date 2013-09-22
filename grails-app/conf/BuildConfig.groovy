@@ -36,9 +36,6 @@ grails.project.dependency.resolution = {
         compile group: 'org.ccil.cowan.tagsoup',
                 name: 'tagsoup',
                 version: '1.2'
-        runtime group: 'org.codehaus.groovy.modules.http-builder',
-                name: 'http-builder',
-                version: '0.5.2'
         compile group: 'org.imgscalr',
                 name: 'imgscalr-lib',
                 version:'4.2'

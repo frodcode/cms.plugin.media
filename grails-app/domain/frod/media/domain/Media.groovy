@@ -10,16 +10,13 @@ abstract class Media {
 
     String typeSlug
 
-    Integer position
-
     static mapping = {
         tablePerHierarchy(false)
-        sort position: "asc"
+        sort id: "desc"
     }
 
     static constraints = {
         mediaImages(nullable:true)
-        position(unique: ['mediaGroup'])
     }
 
     static transients = ['mainImage']

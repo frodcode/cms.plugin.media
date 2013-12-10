@@ -20,7 +20,6 @@ class MediaLocalFacade {
     {
         def mapping = mappingRegister.getMappingByFile(file)
         List<MediaCreationResult> results = mediaFactory.createMediaFromFileBy(file, title, mapping)
-        resolvePositions(results)
         return saveResults(results, mediaGroup, mapping)
     }
 
@@ -28,16 +27,7 @@ class MediaLocalFacade {
     {
         def mapping = mappingRegister.getMappingByUrl(url)
         List<MediaCreationResult> results = mapping.processor.createAssetFromUrl(url)
-        resolvePositions(results)
         return saveResults(results, mediaGroup, mapping)
-    }
-
-    private void resolvePositions(List<MediaCreationResult> results) {
-        def freePosition = Media.count() + 1
-        results.each { result ->
-            result.media.position = freePosition
-            freePosition++
-        }
     }
 
     private List<MediaCreationResult> saveResults(List<MediaCreationResult> results, MediaGroup mediaGroup, def mapping) {

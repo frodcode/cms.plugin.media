@@ -38,11 +38,23 @@ class ImageServiceController {
             redirect(id: correctUrlPart)
             return
         }
+        Date today = new Date()
+        Date expdate = new Date()
+        Date modified = new Date()
+        modified.setTime (modified.getTime() - (10000 * 1000));
+        expdate.year = expdate.year + 1
 
         response.contentType = image.mimeType
         ResizeAdjustment resizeAdjustment = new ResizeAdjustment(100, 100, Scalr.Mode.AUTOMATIC)
         response.outputStream.write(thumbnailRepository.loadThumbnail(keyObject.imageKey, keyObject.adjustments))
         //entity.contentOutputStream.write(originalImageRepository.load(image))
+        response.addHeader('Cache-Control', 'max-age=1209600')
+        response.addHeader('Date', today.toGMTString())
+        response.addHeader('Expires', expdate.toGMTString())
+        response.addHeader('Connection', 'keep-alive')
+        response.addHeader('Last-Modified', modified.toGMTString())
+
+        def ext = keyObject.imageKey.fileExtension.toLowerCase()
         response.outputStream.flush()
 
         //render(contentType: 'image/png') {
